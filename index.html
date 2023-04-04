@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>抽選</title>
+  <style>
+    #randAlphanumeric {
+      font-size: 24px;
+    }
+    .lottery-wrapper {
+      text-align: center;
+    }
+    .lottery-img {
+      margin: 0 auto;
+    }
+    .lottery-number {
+      font-size: 18px;
+    }
+  </style>
+  <script>
+    function generateRandomAlphanumeric(length) {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let result = '';
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+      return result;
+    }
+
+    function displayRandomAlphanumeric() {
+      const length = 6;
+      const randomAlphanumeric = generateRandomAlphanumeric(length);
+      document.getElementById("randAlphanumeric").innerHTML = randomAlphanumeric;
+    }
+
+    window.addEventListener("load", () => {
+      const gifDuration = 3000; // 画像の表示時間（ミリ秒単位）を指定
+      setTimeout(displayRandomAlphanumeric, gifDuration);
+    });
+  </script>
+</head>
+<body>
+  <div class="lottery-wrapper">
+    <h1>抽選番号ガチャ</h1>
+    <img src="gachia.gif" alt="GIF画像" width="20%" class="lottery-img">
+    <p class="lottery-number">あなたの番号: <span id="randAlphanumeric"></span></p>
+  </div>
+</body>
+</html>
