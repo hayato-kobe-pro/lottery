@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
   <title>抽選</title>
   <style>
@@ -13,9 +14,28 @@
     .lottery-img {
       margin: 0 auto;
     }
+    @media screen and (max-width: 600px) {
+  /* ここにスマートフォンのみに適用されるスタイルを書く */
+    .lottery-img {
+        width: 60%;
+      }
+    }
     .lottery-number {
       font-size: 18px;
     }
+    .my-button {
+  background-color: #0065ff;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
   </style>
   <script>
     function generateRandomAlphanumeric(length) {
@@ -37,6 +57,25 @@
       const gifDuration = 3000; // 画像の表示時間（ミリ秒単位）を指定
       setTimeout(displayRandomAlphanumeric, gifDuration);
     });
+
+    function redirectToQuestionnaire() {
+      const randomAlphanumeric = document.getElementById("randAlphanumeric").innerHTML;
+      const baseUrl = "https://ffsales-demo.eventos.tokyo/web/portal/660/event/6987/module/questionnaire/191687/1592";
+      const url = `${baseUrl}?randomAlphanumeric=${randomAlphanumeric}`;
+      window.location.href = url;
+    }
+    function enableButton(buttonId) {
+      const buttonElement = document.getElementById(buttonId);
+      buttonElement.disabled = false;
+    }
+
+    window.addEventListener("load", () => {
+      const gifDuration = 3000; // 画像の表示時間（ミリ秒単位）を指定
+      setTimeout(() => {
+        displayRandomAlphanumeric();
+        enableButton("myButton");
+      }, gifDuration);
+    });
   </script>
 </head>
 <body>
@@ -44,6 +83,8 @@
     <h1>抽選番号ガチャ</h1>
     <img src="gachia.gif" alt="GIF画像" width="20%" class="lottery-img">
     <p class="lottery-number">あなたの番号: <span id="randAlphanumeric"></span></p>
+    <button class="my-button" id="myButton" onclick="redirectToQuestionnaire()" disabled>抽選申し込みへ</button>
   </div>
 </body>
 </html>
+
